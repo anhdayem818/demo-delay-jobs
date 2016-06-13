@@ -1,4 +1,6 @@
 class HookController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:index, :survery_created_callback]
+
   def index
   end
 

@@ -1,15 +1,12 @@
 Rails.application.routes.draw do
-  get 'hook/index'
 
   resources :newsletters do
     member do
       get :deliver
     end
   end
-  resources :hook do
-    collection do
-      post :survery_created_callback
-    end
+  scope '/hooks', :controller => :hook do
+    post :survey_created_callback
   end
   root 'newsletters#index'
   # The priority is based upon order of creation: first created -> highest priority.
@@ -67,3 +64,4 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
