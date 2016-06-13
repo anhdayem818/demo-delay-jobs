@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
+  get 'hook/index'
+
   resources :newsletters do
     member do
       get :deliver
+    end
+  end
+  resources :hook do
+    collection do
+      post :survery_created_callback
     end
   end
   root 'newsletters#index'
