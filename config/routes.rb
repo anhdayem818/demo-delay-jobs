@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   scope '/hooks', :controller => :hook do
     get :survery_created_callback
+    post :survery_created_callback
   end
   root 'newsletters#index'
   # The priority is based upon order of creation: first created -> highest priority.
