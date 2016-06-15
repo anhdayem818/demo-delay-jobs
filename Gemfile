@@ -32,7 +32,8 @@ gem 'delayed_job_active_record'
 # gem 'unicorn'
 gem 'mandrill-api', '~> 1.0.53', require: 'mandrill'
 gem 'sendgrid-ruby', require: 'sendgrid-ruby'
-
+gem 'mailgun-ruby', require: 'mailgun'
+gem 'faraday'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

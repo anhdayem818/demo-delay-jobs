@@ -41,13 +41,25 @@ class AdminMailer < ActionMailer::Base
       m.from = 'taco@cat.limo'
       m.subject = 'Hello world!'
       m.text = 'I heard you like pineapple.'
-      m.html = 'I heard you like the beach <div><img src="cid:beach"></div> <h1>123</h1>'
-
+      m.html = 'I heard you like the beach <div><img src="cid:beach"></div> <h1>123</h1> <a href="google.com"> test open </a>'
     end
-
     res = client.send(mail)
     puts res.code
     puts res.body
+  end
+
+  def mailgun_client
+    api_key= "key-75ba52e6546cd74e5da5754a6e21f6d3"
+    domain='sandbox4be0352aa9624fe3ba3f3f5f10ce2701.mailgun.org'
+    mg_client = Mailgun::Client.new api_key
+    message_params = {
+      :from => "anhdayem818@gmail.com",
+      :to => "abc1zbq@gmail.com",
+      :subject => "Hello",
+      :text => "Testing some Mailgun awesomness!"
+    }
+    mg_client.send_message "#{domain}", message_params
+    puts res
   end
 
 end

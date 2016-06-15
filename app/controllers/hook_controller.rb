@@ -16,7 +16,7 @@ class HookController < ApplicationController
 
     # # The webhook doesn't require a response but let's make sure
     # # we don't send anything
-    puts params
+    puts params["hook"]
     render :nothing => true
 
   end

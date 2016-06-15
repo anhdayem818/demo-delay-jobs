@@ -28,3 +28,20 @@
 <br>
 
 <%= link_to 'New Newsletter', new_newsletter_path %>
+<button onclick="api()"> abc3</button>
+<script type="text/javascript">
+  api = function(){
+    console.log(123)
+    $.ajax({
+      url: "https://api.sendgrid.com/api/filter.setup.json",
+      Type: 'post',
+      crossDomain: true,
+      dataType: 'json',
+      contentType: 'application/json',
+      data: {"api_user": "info@earnedbenefits.com", "api_key": "cNm$sM2a0sa", "name": "eventnotify", "processed": 1, "dropped": 1, "deferred": 1, "delivered": 1, "bounce": 1, "click": 1, "unsubscribe": 1, "spamreport": 1, "url": "https://ide.c9.io/anhdayem8181/demo-webhook/hooks/survery_created_callback", "version": 3 },
+      success: function(data){
+        console.log(data)
+      }
+    });
+  }
+</script>
