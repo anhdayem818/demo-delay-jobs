@@ -34,7 +34,7 @@ class AdminMailer < ActionMailer::Base
 
   def sendgrid_client
     client = SendGrid::Client.new do |c|
-      c.api_key = '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'
+      c.api_key = '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'
     end
     mail = SendGrid::Mail.new do |m|
       m.to = 'abc1zbq@gmail.com'

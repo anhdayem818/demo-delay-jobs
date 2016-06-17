@@ -3,41 +3,133 @@ require 'mandrill'
 require 'faraday'
 require 'sendgrid-ruby'
 require 'json/ext'
+require 'securerandom'
 
 
 
 
 api_user = ''
 endpoint = "/api/mail.send.json"
-api_key= "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"
-url = "https://api.sendgrid.com"
+api_key= "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"
+url = "https://api.sendgrid.com/v3"
 protocol = "https"
 host= 'api.sendgrid.com'
 port = nil
 endpoint = "/api/mail.send.json"
 user_agent = "sendgrid/3;ruby"
 
-mail = SendGrid::Mail.new do |m|
-  m.to = 'abc1zbq@gmail.com'
-  m.from = 'tranguyenbach@gmail.com'
-  m.subject = 'Hello world!'
-  m.text = 'I heard you like pineapple.'
-  m.html = 'I heard you like the beach <div><img src="cid:beach"></div> <h1>123</h1> <a href="google.com"> test open </a>'
-end
+sg = SendGrid::API.new(api_key: api_key)
 
-conn = Faraday.new(url: url) do |c|
-    c.request :multipart
-    c.request :url_encoded
-    c.adapter Faraday.default_adapter
-end
 
-res = conn.post do |req|
-    req.url(endpoint)
+# mail = SendGrid::Mail.new do |m|
+#   m.to = 'abc1zbq@gmail.com'
+#   m.from = 'tranguyenbach@gmail.com'
+#   m.subject = 'Hello world!'
+#   m.text = 'I heard you like pineapple.'
+#   m.html = 'I heard you like the beach <div><img src="cid:beach"></div> <h1>123</h1> <a href="google.com"> test open </a>'
+# end
 
-    req.body = {:from=>"trannguyenbach1992@gmail.com", :subject=>"Hello world!", :to=>"abc1zbq@gmail.com", :text=>"I heard you like pineapple.", :html=>"I heard you like the beach <div><img src=\"cid:beach\"></div> <h1>123</h1> <a href=\"google.com\"> test open </a>", :api_user=>"info@earnedbenefits.com", :api_key=>"cNm$sM2a0sa"}
-  end
+# conn = Faraday.new(url: url) do |c|
+#     c.request :multipart
+#     c.request :url_encoded
+#     c.adapter Faraday.default_adapter
+# end
 
-puts res.body
+# data = {
+#   personalizations: [
+#     {
+#       to:[
+#         email: "abc1zbq@gmail.com"
+#       ]
+#     }
+#   ],
+#   from: { email: "123tranguyenbach1992@gmail.com"},
+#   subject: "test content",
+#   content: [
+#     {
+#       type: "text/html",
+#       value: "Hello world <a href='google.com'> google </a> "
+#     }
+#   ],
+#   tracking_settings: {
+#     click_tracking: {
+#       enable: true,
+#       enable_text: true
+#     },
+#     open_tracking:{
+#       enable: true,
+#       substitution_tag: " %opentrack"
+#     },
+#     subscription_tracking:{
+#       enable: true,
+#       html: "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
+#       substitution_tag: "<%click here%>",
+#       text: "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+#     }
+#   },
+#   custom_args:{
+#     _id: "sendgrid_#{SecureRandom.urlsafe_base64}"
+#   },
+# }
+# data = JSON.parse('
+#   {
+#     "personalizations": [
+#       {"to": [
+#         {"email": "abc1zbq@gmail.com"}
+#         ]
+#       }
+#     ],
+#     "from": {
+#       "email": "tranguyenbach1992@gmail.com"
+#     },
+#     "subject": "Hello, World 123!",
+#     "content": [
+#       {"type": "text/html", "value": "Heya! <a href > 123 </a> "}
+#     ],
+#     "tracking_settings": {
+#       "click_tracking": {
+#         "enable": true,
+#         "enable_text": true
+#       }
+#     },
+#     "custom_args": {
+#       "_id": "sendgrid_1234567890"
+#     },
+#     "subscription_tracking": {
+#       "enable": true,
+#       "html": "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
+#       "substitution_tag": "<%click here%>",
+#       "text": "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+#     }
+#   }'
+# )
+
+# response = sg.client.mail._("send").post(request_body: data)
+# puts response.status_code
+# puts response.body
+# puts response.headers
+
+
+data = JSON.parse('{
+  "enabled": true
+}')
+response = sg.client.tracking_settings.click.patch(request_body: data)
+puts response.status_code
+puts response.body
+puts response.headers
+
+response = sg.client.tracking_settings.click.get()
+puts response.status_code
+puts response.body
+puts response.headers
+
+# res = conn.post do |req|
+#     req.url(endpoint)
+
+#     req.body = data
+#   end
+
+# puts res.body
 
 # {"_json"=>[
 #     {"ip"=>"50.31.49.42", "response"=>"250 2.0.0 OK 1465870255 g126si1557578ita.43 - gsmtp ", "sg_event_id"=>"aTYiO0XIQziKkLMQLxxjHQ", "sg_message_id"=>"g1O94lpgRK-v0W7qmFo70g.filter0807p1mdw1.22854.575F67AC2F.0", "tls"=>1, "event"=>"delivered", "email"=>"abc1zbq@gmail.com", "timestamp"=>1465870255, "smtp-id"=>"<g1O94lpgRK-v0W7qmFo70g@ismtpd0025p1mdw1.sendgrid.net>"},
@@ -64,3 +156,9 @@ puts res.body
 #     -F to=bar@example.com \
 #     -F subject='Hello' \
 #     -F text='Testing some Mailgun awesomness!'
+
+# curl --request POST \
+#   --url https://api.sendgrid.com/v3/mail/send/beta \
+#   --header 'Authorization: Bearer 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' \
+#   --header 'Content-Type: application/json' \
+#   --data '{"personalizations": [{"to": [{"email": "abc1zbq@gmail.com"}]}],"from": {"email": "dx@sendgrid.com"},"subject": "Hello, World!","content": [{"type": "text/plain", "value": "Heya!"}]}'
