@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @email_info.email_id %>
+</p>
+
+<p>
+  <strong>Is open:</strong>
+  <%= @email_info.is_open %>
+</p>
+
+<p>
+  <strong>Is click:</strong>
+  <%= @email_info.is_click %>
+</p>
+
+<%= link_to 'Edit', edit_email_info_path(@email_info) %> |
+<%= link_to 'Back', email_infos_path %>

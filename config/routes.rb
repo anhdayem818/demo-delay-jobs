@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :email_infos
   resources :newsletters do
     member do
       get :deliver
