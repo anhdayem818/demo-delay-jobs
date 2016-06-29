@@ -67,15 +67,15 @@ class AdminMailer < ActionMailer::Base
   end
 
 end
- RestClient.post "https://api:key-ab289d793aa0262070ab01d82836e89f@api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages",
-  :from => "Excited User test@gmail.com",
-  :to => "abc1zbq@gmail.com",
-  :subject => "Hello",
-  :text => "Testing some Mailgun awesomness!"
+ # RestClient.post "https://api:key-ab289d793aa0262070ab01d82836e89f@api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages",
+ #  :from => "Excited User test@gmail.com",
+ #  :to => "abc1zbq@gmail.com",
+ #  :subject => "Hello",
+ #  :text => "Testing some Mailgun awesomness!"
 
-  curl -s --user 'api:key-ab289d793aa0262070ab01d82836e89f' \
-    https://api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages \
-    -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \
-    -F to=abc1zbq@gmail.com \
-    -F subject='Hello' \
-    -F text='Testing some Mailgun awesomness!'
+ #  curl -s --user 'api:key-ab289d793aa0262070ab01d82836e89f' \
+ #    https://api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages \
+ #    -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \
+ #    -F to=abc1zbq@gmail.com \
+ #    -F subject='Hello' \
+ #    -F text='Testing some Mailgun awesomness!'
