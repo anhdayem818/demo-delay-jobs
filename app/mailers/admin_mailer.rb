@@ -49,8 +49,9 @@ class AdminMailer < ActionMailer::Base
   end
 
   def mailgun_client
-    api_key= "key-75ba52e6546cd74e5da5754a6e21f6d3"
-    domain='sandbox4be0352aa9624fe3ba3f3f5f10ce2701.mailgun.org'
+    begin
+    api_key= "key-ab289d793aa0262070ab01d82836e89f"
+    domain='sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org'
     mg_client = Mailgun::Client.new api_key
     message_params = {
       :from => "anhdayem818@gmail.com",
@@ -58,8 +59,23 @@ class AdminMailer < ActionMailer::Base
       :subject => "Hello",
       :text => "Testing some Mailgun awesomness!"
     }
-    mg_client.send_message "#{domain}", message_params
-    puts res
+    res = mg_client.send_message "#{domain}", message_params
+    puts res.body
+    rescue Exception => e
+      puts e
+    end
   end
 
 end
+ RestClient.post "https://api:key-ab289d793aa0262070ab01d82836e89f@api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages",
+  :from => "Excited User test@gmail.com",
+  :to => "abc1zbq@gmail.com",
+  :subject => "Hello",
+  :text => "Testing some Mailgun awesomness!"
+
+  curl -s --user 'api:key-ab289d793aa0262070ab01d82836e89f' \
+    https://api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages \
+    -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \
+    -F to=abc1zbq@gmail.com \
+    -F subject='Hello' \
+    -F text='Testing some Mailgun awesomness!'
