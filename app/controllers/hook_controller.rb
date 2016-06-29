@@ -30,8 +30,11 @@ class HookController < ApplicationController
   end
 
   def mail_gun_survery_created_callback
+
+    puts params
+    
     begin
-      
+    
     rescue Exception => e
       
     end
@@ -39,3 +42,4 @@ class HookController < ApplicationController
   end
 
 end
+

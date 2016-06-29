@@ -57,7 +57,8 @@ class AdminMailer < ActionMailer::Base
       :from => "anhdayem818@gmail.com",
       :to => "abc1zbq@gmail.com",
       :subject => "Hello",
-      :text => "Testing some Mailgun awesomness!"
+      :text => "Testing some Mailgun awesomness!",
+      "o:tracking" => true
     }
     res = mg_client.send_message "#{domain}", message_params
     puts res.body
