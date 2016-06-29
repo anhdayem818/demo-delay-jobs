@@ -35,42 +35,42 @@ sg = SendGrid::API.new(api_key: api_key)
 #     c.adapter Faraday.default_adapter
 # end
 
-# data = {
-#   personalizations: [
-#     {
-#       to:[
-#         email: "abc1zbq@gmail.com"
-#       ]
-#     }
-#   ],
-#   from: { email: "123tranguyenbach1992@gmail.com"},
-#   subject: "test content",
-#   content: [
-#     {
-#       type: "text/html",
-#       value: "Hello world <a href='google.com'> google </a> "
-#     }
-#   ],
-#   tracking_settings: {
-#     click_tracking: {
-#       enable: true,
-#       enable_text: true
-#     },
-#     open_tracking:{
-#       enable: true,
-#       substitution_tag: " %opentrack"
-#     },
-#     subscription_tracking:{
-#       enable: true,
-#       html: "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
-#       substitution_tag: "<%click here%>",
-#       text: "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
-#     }
-#   },
-#   custom_args:{
-#     _id: "sendgrid_#{SecureRandom.urlsafe_base64}"
-#   },
-# }
+data = {
+  personalizations: [
+    {
+      to:[
+        email: "abc1zbq@gmail.com"
+      ]
+    }
+  ],
+  from: { email: "123tranguyenbach1992@gmail.com"},
+  subject: "test content",
+  content: [
+    {
+      type: "text/html",
+      value: "Hello world <a href='google.com'> google </a> Hello world <a href='sendgrid.com'> tracking </a> "
+    }
+  ],
+  # tracking_settings: {
+  #   click_tracking: {
+  #     enable: true,
+  #     enable_text: true
+  #   },
+  #   open_tracking:{
+  #     enable: true,
+  #     substitution_tag: " %opentrack"
+  #   },
+  #   subscription_tracking:{
+  #     enable: true,
+  #     html: "If you would like to unsubscribe and stop receiving these emails <% clickhere %>.",
+  #     substitution_tag: "<%click here%>",
+  #     text: "If you would like to unsubscribe and stop receiveing these emails <% click here %>."
+  #   }
+  # },
+  custom_args:{
+    _id: "sendgrid_#{SecureRandom.urlsafe_base64}"
+  },
+}
 # data = JSON.parse('
 #   {
 #     "personalizations": [
@@ -104,24 +104,24 @@ sg = SendGrid::API.new(api_key: api_key)
 #   }'
 # )
 
-# response = sg.client.mail._("send").post(request_body: data)
+response = sg.client.mail._("send").post(request_body: data)
+puts response.status_code
+puts response.body
+puts response.headers
+
+
+# data = JSON.parse('{
+#   "enabled": true
+# }')
+# response = sg.client.tracking_settings.click.patch(request_body: data)
 # puts response.status_code
 # puts response.body
 # puts response.headers
 
-
-data = JSON.parse('{
-  "enabled": true
-}')
-response = sg.client.tracking_settings.click.patch(request_body: data)
-puts response.status_code
-puts response.body
-puts response.headers
-
-response = sg.client.tracking_settings.click.get()
-puts response.status_code
-puts response.body
-puts response.headers
+# response = sg.client.tracking_settings.click.get()
+# puts response.status_code
+# puts response.body
+# puts response.headers
 
 # res = conn.post do |req|
 #     req.url(endpoint)

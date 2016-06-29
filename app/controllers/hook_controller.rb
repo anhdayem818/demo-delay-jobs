@@ -17,6 +17,22 @@ class HookController < ApplicationController
     # # The webhook doesn't require a response but let's make sure
     # # we don't send anything
     puts params["hook"]
+    puts params["hook"]["_json"]
+    results = params["hook"]["_json"]
+    puts "==============================="
+
+    id = results.["_id"]
+    event = results.["event"]
+    time_at = Time.at results.timestamp.to_i
+    puts "#{id}---#{event}---#{time_at}"
+    # EmailInfo = Struct.new(:id, :is_open, )
+    # email_info = EmailInfo.find_by_email_id(id)
+    # case event
+    # when "open"
+    #   email_info.opened
+    # when "click"
+    #   email_info.clicked
+    # end
     render :nothing => true
 
   end
