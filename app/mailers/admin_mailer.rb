@@ -51,7 +51,7 @@ class AdminMailer < ActionMailer::Base
   def mailgun_client
     begin
     api_key= "key-ab289d793aa0262070ab01d82836e89f"
-    domain='sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org'
+    domain='hahalolo.com'
     mg_client = Mailgun::Client.new api_key
     message_params = {
       :from => "anhdayem818@gmail.com",
@@ -73,9 +73,9 @@ end
  #  :subject => "Hello",
  #  :text => "Testing some Mailgun awesomness!"
 
- #  curl -s --user 'api:key-ab289d793aa0262070ab01d82836e89f' \
- #    https://api.mailgun.net/v3/sandbox1c7d7425dcc14ce29cdd04f6b626b54c.mailgun.org/messages \
- #    -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \
- #    -F to=abc1zbq@gmail.com \
- #    -F subject='Hello' \
- #    -F text='Testing some Mailgun awesomness!'
+  # curl -s --user 'key-ab289d793aa0262070ab01d82836e89f' \
+  #   https://api.mailgun.net/v3/hahalolo.com/messages \
+  #   -F from='Excited User <mailgun@YOUR_DOMAIN_NAME>' \
+  #   -F to=abc1zbq@gmail.com \
+  #   -F subject='Hello' \
+  #   -F text='Testing some Mailgun awesomness!'
