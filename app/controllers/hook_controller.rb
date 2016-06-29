@@ -34,7 +34,11 @@ class HookController < ApplicationController
     puts params
     
     begin
-    
+      results = JSON.parse(params)
+      event =  results["event"]
+      email_id = results["message-id"]
+      email_info = EmailInfo.find_by_email_id(email_id)
+      email_info.event_update(event)
     rescue Exception => e
       
     end

@@ -9,9 +9,9 @@ class EmailInfo < ActiveRecord::Base
 
   def event_update(event)
     case event
-    when "open"
+    when "open" || "opened"
       self.opened
-    when "click"
+    when "click" || "clicked"
       self.clicked
     end  
   end
