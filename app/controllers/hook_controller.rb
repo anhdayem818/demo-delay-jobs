@@ -41,15 +41,14 @@ class HookController < ApplicationController
     render :nothing => true
   end
 
-    def elastic_mail_survery_created_callback
+  def elastic_mail_survery_created_callback
     begin
-      puts params
-      # event =  params["event"]
-      # email_id = params["message-id"]
-      # email_info = EmailInfo.find_by_email_id(email_id)
-      # email_info.event_update(event)
+      results = params
+      email_id = results["transaction"]
+      event = results["status"]
+      email_info = EmailInfo.find_by_email_id("ElasticEmail_#{email_id}")
+      email_info.event_update(event)
     rescue Exception => e
-      
     end
     render :nothing => true
   end
