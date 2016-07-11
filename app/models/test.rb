@@ -43,7 +43,7 @@ data = {
       ]
     }
   ],
-  from: { email: "123tranguyenbach1992@gmail.com"},
+  from: { email: "support@hahalolo.com"},
   subject: "test content",
   content: [
     {

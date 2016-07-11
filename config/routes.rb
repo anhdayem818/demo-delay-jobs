@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post :send_grid_survery_created_callback
     post :mail_gun_survery_created_callback
     get :mail_gun_survery_created_callback
+    post :elastic_mail_survery_created_callback
   end
   root 'newsletters#index'
   # The priority is based upon order of creation: first created -> highest priority.
